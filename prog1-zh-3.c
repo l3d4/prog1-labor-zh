@@ -25,9 +25,9 @@ A paraméterekhez tartozó literálokban minden ' ' (szóköz) karakter a *• '
 #include <string.h>
 #include <ctype.h>
 
-char* double_digits(char* original) {
+char * double_digits(char *original) {
     int length = strlen(original);
-    char* result = calloc(2*length, sizeof(char));
+    char *result = calloc(2*length, sizeof(char));
     int idx = 0; // másolás során helyiérték nyomon követése az új tömbben
 
     for (int i = 0; i<length; i++) {
@@ -45,7 +45,7 @@ char* double_digits(char* original) {
 
 int main()
 {
-    char* original = calloc(30, sizeof(char));
+    char *original = calloc(30, sizeof(char));
 
     printf("Bemenet:\n");
     fgets(original, 30, stdin);
