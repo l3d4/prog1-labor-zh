@@ -16,29 +16,35 @@ ABCDEF;Gipsz Jakab;1;0;2;2;0;3;4;0;5;5;0
 
 int main()
 {
-    char line[100];
+    int sum = 0;
+    char *line_from_file = calloc(100, sizeof(char));
+    char *name = calloc(30, sizeof(char));
 
     FILE *file_to_red = fopen("be.txt", "r");
-    int sum = 0;
-    char name[30];
 
-    while(fgets(line, 100, file_to_red) != NULL)
+    while(fgets(line_from_file, 100, file_to_red) != NULL)
     {
-        line[strlen(line) - 1] = '\0'; // sor végi new line '\n' helyettesítése '\0'-val (=string end)
+        // sor végi new line '\n' helyettesítése '\0'-val (=string end):
+        line_from_file[strlen(line_from_file) - 1] = '\0';
 
+        // input tokenizálása ";" szerint:
         char *token;
-        token = strtok(line, ";"); // Neptun-kód (nem kell)
+        token = strtok(line_from_file, ";"); // Neptun-kód (nem kell)
         token = strtok(NULL, ";"); // Név
         strcpy(name, token);
 
+        sum = 0;
         while((token = strtok(NULL, ";")) != NULL)
         {
             sum += atoi(token);
         }
         
-        printf("%s összpontszám: %d\n", name, sum);
-
-        sum = 0;
+        printf("%s, összpontszám: %d\n", name, sum);
     }
+
+    free(name);
+    free(line_from_file);
+    fclose(file_to_red);
+
     return 0;
 }
