@@ -18,13 +18,13 @@ int main()
 {
     int sum = 0;
     
-    char *line_from_file = calloc(100, sizeof(char));
+    char* line_from_file = calloc(100, sizeof(char));
     if (line_from_file == NULL)
     {
         return 1;
     }
 
-    char *name = calloc(30, sizeof(char));
+    char* name = calloc(30, sizeof(char));
     if (name == NULL)
     {
         return 1;
