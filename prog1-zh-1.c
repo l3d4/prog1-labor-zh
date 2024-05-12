@@ -17,6 +17,40 @@ Kimenet:
 #include <stdio.h>
 #include <stdlib.h>
 
+int szamjegyek_kobenek_osszege(int);
+
+int main()
+{
+    int size_of_array = 10;
+    int* numbers = calloc(size_of_array, sizeof(int));
+    
+    printf("Kérem adjon meg %d pozitív egész számot:\n", size_of_array);
+    
+    for (int i = 0; i < size_of_array; i++)
+    {
+        scanf("%d", &numbers[i]);
+        if (numbers[i] < 0)
+        {
+            printf("Csak pozitív számot adjon meg.\n");
+            printf("Kérem adjon meg 10 pozitív egész számot:\n");
+            i = 0;
+        }
+    }
+
+    for (int i = 0; i < size_of_array; i++)
+    {
+        if (szamjegyek_kobenek_osszege(numbers[i]))
+        {
+            printf("%d ", numbers[i]);
+        }
+    }
+    printf("\n");
+
+    free(numbers);
+
+    return 0;
+}
+
 int szamjegyek_kobenek_osszege(int szam)
 {
     int true_or_false = 0;
@@ -36,35 +70,4 @@ int szamjegyek_kobenek_osszege(int szam)
     }
 
     return true_or_false;
-}
-
-int main()
-{
-    int* numbers = calloc(10, sizeof(int));
-    
-    printf("Kérem adjon meg 10 pozitív egész számot:\n");
-    
-    for (int i = 0; i < 10; i++)
-    {
-        scanf("%d", &numbers[i]);
-        if (numbers[i] < 0)
-        {
-            printf("Csak pozitív számot adjon meg.\n");
-            printf("Kérem adjon meg 10 pozitív egész számot:\n");
-            i = 0;
-        }
-    }
-
-    for (int i = 0; i < 10; i++)
-    {
-        if (szamjegyek_kobenek_osszege(numbers[i]))
-        {
-            printf("%d ", numbers[i]);
-        }
-    }
-    printf("\n");
-
-    free(numbers);
-
-    return 0;
 }

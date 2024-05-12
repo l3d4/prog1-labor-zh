@@ -25,9 +25,29 @@ A paraméterekhez tartozó literálokban minden ' ' (szóköz) karakter a *• '
 #include <string.h>
 #include <ctype.h>
 
-char * double_digits(char *original) {
+void double_digits(char*, char*);
+
+int main()
+{
+    int line_length = 30;
+    char* original = calloc(line_length, sizeof(char));
+    char* result = calloc(2 * line_length, sizeof(char));
+
+    printf("Bemenet:\n");
+    fgets(original, line_length, stdin);
+
+    double_digits(original, result);
+
+    printf("Az átalakított sztring:\n%s\n", result);
+
+    free(original);
+    free(result);
+
+    return 0;
+}
+
+void double_digits(char* original, char* result) {
     int length = strlen(original);
-    char *result = calloc(2*length, sizeof(char));
     int idx = 0; // másolás során helyiérték nyomon követése az új tömbben
 
     for (int i = 0; i<length; i++) {
@@ -39,18 +59,4 @@ char * double_digits(char *original) {
         }
     }
     result[idx] = '\0';
-    
-    return result;
-}
-
-int main()
-{
-    char *original = calloc(30, sizeof(char));
-
-    printf("Bemenet:\n");
-    fgets(original, 30, stdin);
-
-    printf("Az átalakított sztring:\n%s\n", double_digits(original));
-
-    return 0;
 }

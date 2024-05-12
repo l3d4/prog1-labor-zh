@@ -17,12 +17,26 @@ ABCDEF;Gipsz Jakab;1;0;2;2;0;3;4;0;5;5;0
 int main()
 {
     int sum = 0;
+    
     char *line_from_file = calloc(100, sizeof(char));
+    if (line_from_file == NULL)
+    {
+        return 1;
+    }
+
     char *name = calloc(30, sizeof(char));
+    if (name == NULL)
+    {
+        return 1;
+    }
 
-    FILE *file_to_red = fopen("be.txt", "r");
+    FILE *file_to_read = fopen("be.txt", "r");
+    if (file_to_read == NULL)
+    {
+        return 1;
+    }
 
-    while(fgets(line_from_file, 100, file_to_red) != NULL)
+    while(fgets(line_from_file, 100, file_to_read) != NULL)
     {
         // sor végi new line '\n' helyettesítése '\0'-val (=string end):
         line_from_file[strlen(line_from_file) - 1] = '\0';
@@ -44,7 +58,7 @@ int main()
 
     free(name);
     free(line_from_file);
-    fclose(file_to_red);
+    fclose(file_to_read);
 
     return 0;
 }

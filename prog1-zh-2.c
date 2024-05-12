@@ -12,40 +12,8 @@ A Fibonacci-számok sorozata: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, …
 #include <stdio.h>
 #include <stdlib.h>
 
-int* crt_fib_arr(int n)
-{
-    int* fib_arr = calloc(n, sizeof(n));
-    
-    fib_arr[0] = 0;
-    fib_arr[1] = 1;
-    for (int i = 2; i < n; i++)
-    {
-        fib_arr[i] = fib_arr[i-1] + fib_arr[i-2];
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        printf("%d, ", fib_arr[i]);
-    }
-    printf("\n");
-
-    return fib_arr;
-}
-
-int lrgst_even_fib_num(int* array, int n)
-{
-    int lefn = 0; // Largest Even Fibonacci Number
-
-    for (int i = 0; i < n; i++)
-    {
-        if (array[i] > lefn && array[i] % 2 == 0)
-        {
-            lefn = array[i];
-        }
-    }
-
-    return lefn;
-}
+void crt_fib_arr(int*, int);
+int lrgst_even_fib_num(int*, int);
 
 int main()
 {
@@ -54,7 +22,46 @@ int main()
     scanf("%d", &n);
     printf("\n");
 
-    printf("A legnagyobb páros Fibonacci szám: %d\n", lrgst_even_fib_num(crt_fib_arr(n), n));
+    int* fib_arr = calloc(n, sizeof(n));
+    crt_fib_arr(fib_arr, n);
+
+    printf("A legnagyobb páros Fibonacci szám: %d\n", lrgst_even_fib_num(fib_arr, n));
+
+    free(fib_arr);
 
     return 0;
+}
+
+void crt_fib_arr(int* fib_arr, int n) // create_fibonacci_array
+{
+    fib_arr[0] = 0;
+    fib_arr[1] = 1;
+    for (int i = 2; i < n; i++)
+    {
+        fib_arr[i] = fib_arr[i-1] + fib_arr[i-2];
+    }
+    
+    printf("A Fibonacci számok sorozata: ");
+    int i;
+    for (i = 0; i < n-1; i++)
+    {
+        printf("%d, ", fib_arr[i]);
+    }
+    printf("%d", fib_arr[i]);
+    printf("\n");
+}
+
+int lrgst_even_fib_num(int* fib_array, int n)
+{
+    int lefn = 0; // Largest Even Fibonacci Number
+
+    for (int i = 0; i < n; i++)
+    {
+        if (fib_array[i] > lefn && fib_array[i] % 2 == 0)
+        {
+            lefn = fib_array[i];
+        }
+    }
+
+    return lefn;
 }
